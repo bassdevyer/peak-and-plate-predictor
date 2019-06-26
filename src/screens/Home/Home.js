@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import './Home.css'
 import {
   ControlLabel,
-  Grid,
-  Col,
-  Row,
+  Label,
   FormControl,
   FormGroup,
   InputGroup,
+  Panel,
   Image,
 } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -21,6 +20,7 @@ export default class Home extends Component {
       platePrefix: '',
       plateSuffix: '',
       dateTime: '',
+      canBeOnRoad: null,
     }
   }
 
@@ -45,10 +45,8 @@ export default class Home extends Component {
   }
 
   checkIfCanBeOnRoad = () => {
-    let canBeOnRoad = true
     const dateTime = new Date(this.state.dateTime)
     const dayOfWeekIndex = dateTime.getDay()
-    console.log(dayOfWeekIndex)
     const morningStartTime = new Date(this.state.dateTime).setHours(7, 0, 0)
     const morningEndTime = new Date(this.state.dateTime).setHours(9, 30, 0)
     const afternoonStartTime = new Date(this.state.dateTime).setHours(16, 0,
@@ -67,38 +65,52 @@ export default class Home extends Component {
         // Monday
         case 1:
           if (plateLastDigit === '1' || plateLastDigit === '2') {
-            canBeOnRoad = false
+            this.setState({ canBeOnRoad: false })
           }
           break
         // Tuesday
         case 2:
           if (plateLastDigit === '3' || plateLastDigit === '4') {
-            canBeOnRoad = false
+            this.setState({ canBeOnRoad: false })
           }
           break
         // Wednesday
         case 3:
           if (plateLastDigit === '5' || plateLastDigit === '6') {
-            canBeOnRoad = false
+            this.setState({ canBeOnRoad: false })
           }
           break
         // Thursday
         case 4:
           if (plateLastDigit === '7' || plateLastDigit === '8') {
-            canBeOnRoad = false
+            this.setState({ canBeOnRoad: false })
           }
           break
         // Friday
         case 5:
           if (plateLastDigit === '9' || plateLastDigit === '0') {
-            canBeOnRoad = false
+            this.setState({ canBeOnRoad: false })
           }
           break
+        default:
+          this.setState({ canBeOnRoad: true })
 
       }
     }
-    console.log(canBeOnRoad)
-    return canBeOnRoad
+    console.log('canBeOnRoad', this.state.canBeOnRoad)
+  }
+
+  static getDerivedStateFromProps (nextProps, prevState) {
+    if (nextProps.someValue !== prevState.someValue) {
+      return { someState: nextProps.someValue };
+    } else return null;
+  }
+
+    return (this.state.platePrefix !== nextProps.platePrefix)
+      || (this.state.plateSuffix !== nextProps.plateSuffix)
+      || (this.state.dateTime !== nextProps.dateTime
+      || (this.state.canBeOnRoad === null && nextState.canBeOnRoad !== null))
+
   }
 
   componentDidUpdate = () => {
@@ -112,52 +124,57 @@ export default class Home extends Component {
 
   render () {
     return (
-      <form className={'Home'}>
-        <Image src="info.png"
-               responsive
-               rounded/>
-        <FormGroup>
-          <Grid>
-            <Row>
-              <Col xs={6} md={4}>
-                <Image src="/info.png" rounded/>
-              </Col>
-              <Col xs={6} md={4}>
-                <Image src="/info.png" circle/>
-              </Col>
-              <Col xs={6} md={4}>
-                <Image src="/info.png" thumbnail/>
-              </Col>
-            </Row>
-          </Grid>;
-          <ControlLabel>Registration Plate</ControlLabel>
-          <InputGroup>
-            <FormControl type="text"
-                         id='platePrefix'
-                         onKeyPress={(e) => Home.onPlatePrefixKeyPress(e)}
-                         value={this.state.platePrefix}
-                         maxLength={3}
-                         onChange={this.handleChange}/>
-            <InputGroup.Addon>-</InputGroup.Addon>
-            <FormControl type="text"
-                         id='plateSuffix'
-                         onKeyPress={(e) => Home.onPlateSuffixKeyPress(e)}
-                         value={this.state.plateSuffix}
-                         maxLength={4}
-                         onChange={this.handleChange}/>
-          </InputGroup>
-        </FormGroup>
-        <FormGroup>
-          <ControlLabel>Date & Time</ControlLabel>
-          <InputGroup>
-            <FormControl type="datetime-local"
-                         id='dateTime'
-                         value={this.state.dateTime}
-                         onChange={this.handleChange}/>
-          </InputGroup>
-        </FormGroup>
+      <Panel bsStyle="primary">
+        <Panel.Heading>
+          <Panel.Title componentClass="h3">
+            Peak and Plate Predictor
+          </Panel.Title>
+        </Panel.Heading>
+        <Panel.Body>
+          <form className={'Home'}>
+            <Image src="/info.png" responsive/>
+            <FormGroup>
+              <ControlLabel>Registration Plate</ControlLabel>
+              <InputGroup>
+                <FormControl type="text"
+                             id='platePrefix'
+                             onKeyPress={(e) => Home.onPlatePrefixKeyPress(e)}
+                             value={this.state.platePrefix}
+                             maxLength={3}
+                             onChange={this.handleChange}/>
+                <InputGroup.Addon>-</InputGroup.Addon>
+                <FormControl type="text"
+                             id='plateSuffix'
+                             onKeyPress={(e) => Home.onPlateSuffixKeyPress(e)}
+                             value={this.state.plateSuffix}
+                             maxLength={4}
+                             onChange={this.handleChange}/>
+              </InputGroup>
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>Date & Time</ControlLabel>
+              <InputGroup>
+                <FormControl type="datetime-local"
+                             id='dateTime'
+                             value={this.state.dateTime}
+                             onChange={this.handleChange}/>
+              </InputGroup>
+            </FormGroup>
+            <FormGroup>
+              <Label bsStyle={this.state.canBeOnRoad === null
+                ? 'default'
+                : this.state.canBeOnRoad
+                  ? 'danger'
+                  : 'success'}>{this.state.canBeOnRoad === null
+                ? 'Complete los datos'
+                : this.state.canBeOnRoad
+                  ? 'Puede circular'
+                  : 'No puede circular'}</Label>
+            </FormGroup>
 
-      </form>
+          </form>
+        </Panel.Body>
+      </Panel>
     )
   }
 }
