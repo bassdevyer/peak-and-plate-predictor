@@ -96,20 +96,17 @@ export default class Home extends Component {
           this.setState({ canBeOnRoad: true })
 
       }
+    }else{
+      this.setState({ canBeOnRoad: true })
     }
     console.log('canBeOnRoad', this.state.canBeOnRoad)
   }
 
-  static getDerivedStateFromProps (nextProps, prevState) {
-    if (nextProps.someValue !== prevState.someValue) {
-      return { someState: nextProps.someValue };
-    } else return null;
-  }
-
-    return (this.state.platePrefix !== nextProps.platePrefix)
-      || (this.state.plateSuffix !== nextProps.plateSuffix)
-      || (this.state.dateTime !== nextProps.dateTime
-      || (this.state.canBeOnRoad === null && nextState.canBeOnRoad !== null))
+  shouldComponentUpdate (nextProps, nextState) {
+    return (this.state.platePrefix !== nextState.platePrefix)
+      || (this.state.plateSuffix !== nextState.plateSuffix)
+      || (this.state.dateTime !== nextState.dateTime)
+      || (this.state.canBeOnRoad !== nextState.canBeOnRoad)
 
   }
 
@@ -164,8 +161,8 @@ export default class Home extends Component {
               <Label bsStyle={this.state.canBeOnRoad === null
                 ? 'default'
                 : this.state.canBeOnRoad
-                  ? 'danger'
-                  : 'success'}>{this.state.canBeOnRoad === null
+                  ? 'success'
+                  : 'danger'}>{this.state.canBeOnRoad === null
                 ? 'Complete los datos'
                 : this.state.canBeOnRoad
                   ? 'Puede circular'
