@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import './Home.css'
 import {
   ControlLabel,
-  Label,
-  FormControl,
   FormGroup,
   InputGroup,
   Panel,
   Image,
 } from 'react-bootstrap'
-import 'react-datepicker/dist/react-datepicker.css'
+import PlatePrefixFormControl
+  from '../../components/PlatePrefixFormControl'
+import PlateSuffixFormControl from '../../components/PlateSuffixFormControl'
+import DateTimeFormControl from '../../components/DateTimeFormControl'
+import ResultLabel from '../../components/ResultLabel'
 
 export default class Home extends Component {
 
@@ -20,20 +22,6 @@ export default class Home extends Component {
       platePrefix: '',
       plateSuffix: '',
       dateTime: '',
-    }
-  }
-
-  static onPlatePrefixKeyPress = e => {
-    const regExp = /[a-zA-Z]+/g
-    if (!regExp.test(e.key)) {
-      e.preventDefault()
-    }
-  }
-
-  static onPlateSuffixKeyPress = e => {
-    const regExp = /[0-9]+/g
-    if (!regExp.test(e.key)) {
-      e.preventDefault()
     }
   }
 
@@ -126,32 +114,26 @@ export default class Home extends Component {
             <FormGroup>
               <ControlLabel>Registration Plate</ControlLabel>
               <InputGroup>
-                <FormControl type="text"
-                             id='platePrefix'
-                             onKeyPress={(e) => Home.onPlatePrefixKeyPress(e)}
-                             value={this.state.platePrefix}
-                             maxLength={3}
-                             onChange={this.handleChange}/>
+                <PlatePrefixFormControl id='platePrefix'
+                                        value={this.state.platePrefix}
+                                        onChange={this.handleChange}/>
                 <InputGroup.Addon>-</InputGroup.Addon>
-                <FormControl type="text"
-                             id='plateSuffix'
-                             onKeyPress={(e) => Home.onPlateSuffixKeyPress(e)}
-                             value={this.state.plateSuffix}
-                             maxLength={4}
-                             onChange={this.handleChange}/>
+                <PlateSuffixFormControl id='plateSuffix'
+                                        value={this.state.plateSuffix}
+                                        onChange={this.handleChange}/>
               </InputGroup>
             </FormGroup>
             <FormGroup>
               <ControlLabel>Date & Time</ControlLabel>
               <InputGroup>
-                <FormControl type="datetime-local"
-                             id='dateTime'
-                             value={this.state.dateTime}
-                             onChange={this.handleChange}/>
+                <DateTimeFormControl
+                  id='dateTime'
+                  value={this.state.dateTime}
+                  onChange={this.handleChange}/>
               </InputGroup>
             </FormGroup>
             <FormGroup>
-              <Label bsStyle={result.style}>{result.label}</Label>
+              <ResultLabel {...result}/>
             </FormGroup>
 
           </form>
