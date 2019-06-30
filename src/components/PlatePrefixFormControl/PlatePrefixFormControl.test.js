@@ -28,4 +28,29 @@ describe('Testing props', () => {
     expect(PlatePrefixFormControl.defaultProps.onKeyPress)
       .toBeDefined()
   })
+
+  it('Sets external props', () => {
+    const props = {
+      value: '',
+      onChange: jest.fn(),
+    }
+    const component = create(
+      <PlatePrefixFormControl/>,
+    )
+    expect(PlatePrefixFormControl.props.className)
+      .toEqual(props.className)
+    expect(PlatePrefixFormControl.defaultProps.type)
+      .toEqual(props.type)
+    expect(PlatePrefixFormControl.defaultProps.maxLength)
+      .toEqual(props.maxLength)
+    expect(PlatePrefixFormControl.defaultProps.onKeyPress)
+      .toBeDefined()
+  })
+
+})
+
+describe('Testing only-letters acceptance', () => {
+  it('Accepts only letters', () => {
+
+  })
 })
