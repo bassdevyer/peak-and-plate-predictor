@@ -58,37 +58,37 @@ export default class Home extends Component {
         switch (dayOfWeekIndex) {
           // Monday
           case 1:
-            if (plateLastDigit === '1' || plateLastDigit === '2') {
-              result = negativeResult
-            }
+            result = (plateLastDigit === '1' || plateLastDigit === '2')
+              ? negativeResult
+              : positiveResult
             break
           // Tuesday
           case 2:
-            if (plateLastDigit === '3' || plateLastDigit === '4') {
-              result = negativeResult
-            }
+            result = (plateLastDigit === '3' || plateLastDigit === '4')
+              ? negativeResult
+              : positiveResult
             break
           // Wednesday
           case 3:
-            if (plateLastDigit === '5' || plateLastDigit === '6') {
-              result = negativeResult
-            }
+            result = (plateLastDigit === '5' || plateLastDigit === '6')
+              ? negativeResult
+              : positiveResult
             break
           // Thursday
           case 4:
-            if (plateLastDigit === '7' || plateLastDigit === '8') {
-              result = negativeResult
-            }
+            result = (plateLastDigit === '7' || plateLastDigit === '8')
+              ? negativeResult
+              : positiveResult
+
             break
           // Friday
           case 5:
-            if (plateLastDigit === '9' || plateLastDigit === '0') {
-              result = negativeResult
-            }
+            result = (plateLastDigit === '9' || plateLastDigit === '0')
+              ? negativeResult
+              : positiveResult
             break
           default:
             result = positiveResult
-
         }
       } else {
         result = positiveResult
