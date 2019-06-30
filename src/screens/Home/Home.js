@@ -79,7 +79,6 @@ export default class Home extends Component {
             result = (plateLastDigit === '7' || plateLastDigit === '8')
               ? negativeResult
               : positiveResult
-
             break
           // Friday
           case 5:

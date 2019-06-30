@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component default rendering Renders default component 1`] = `
+<div
+  className="panel panel-primary"
+>
+  <div
+    className="panel-heading"
+  >
+    <h3
+      className="panel-title"
+    >
+      Peak and Plate Predictor
+    </h3>
+  </div>
+  <div
+    className="panel-body"
+  >
+    <form
+      className="Home"
+    >
+      <img
+        className="img-responsive"
+        src="/info.png"
+      />
+      <div
+        className="form-group"
+      >
+        <label
+          className="control-label"
+        >
+          Registration Plate
+        </label>
+        <span
+          className="input-group"
+        >
+          <input
+            className="platePrefixFormControl form-control"
+            id="platePrefix"
+            maxLength={3}
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            type="text"
+            value=""
+          />
+          <span
+            className="input-group-addon"
+          >
+            -
+          </span>
+          <input
+            className="plateSuffixFormControl form-control"
+            id="plateSuffix"
+            maxLength={4}
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            type="text"
+            value=""
+          />
+        </span>
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          className="control-label"
+        >
+          Date & Time
+        </label>
+        <span
+          className="input-group"
+        >
+          <input
+            className="form-control"
+            id="dateTime"
+            onChange={[Function]}
+            type="datetime-local"
+            value=""
+          />
+        </span>
+      </div>
+      <div
+        className="form-group"
+      >
+        <span
+          className="label label-default"
+        >
+          Complete los datos
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+`;
