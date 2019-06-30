@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component default rendering Renders default component 1`] = `
+<input
+  className="form-control"
+  type="datetime-local"
+/>
+`;

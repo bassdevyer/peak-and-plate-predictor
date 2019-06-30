@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component default rendering Renders component correctly 1`] = `
+<input
+  className="platePrefixFormControl form-control"
+  maxLength={3}
+  onKeyPress={[Function]}
+  type="text"
+/>
+`;
