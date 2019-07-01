@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component default rendering Renders component correctly 1`] = `
+<span
+  className="label label-default hidden"
+/>
+`;
