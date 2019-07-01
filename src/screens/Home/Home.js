@@ -99,7 +99,6 @@ export default class Home extends Component {
   }
 
   render () {
-    console.log(this.state)
     const result = this.checkIfCanBeOnRoad()
     return (
       <Panel bsStyle="primary">
