@@ -4,10 +4,10 @@ import { FormControl } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
 const propTypes = {
-    id: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
+    id: PropTypes.string,
+    onChange: PropTypes.func,
     type: PropTypes.string,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
 
   },
   defaultProps = {
